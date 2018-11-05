@@ -9,15 +9,14 @@ import 'package:fast_shop/pages/detalle_promocion.dart';
 import 'package:fast_shop/widgets/promociones_card_widget.dart';
 
 class PromocionesPage extends StatelessWidget {
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  // final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     final PromocionCatalogoBloc promocionBloc =
         BlocProvider.of<PromocionCatalogoBloc>(context);
 
-    return Scaffold(
-      body: Column(
+    return Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Expanded(
@@ -36,13 +35,12 @@ class PromocionesPage extends StatelessWidget {
                           snapshot.data);
                     },
                     itemCount:
-                        (snapshot.data == null ? 0 : snapshot.data.length) + 30,
+                        (snapshot.data == null ? 1 : snapshot.data.length),
                   );
                 }),
           ),
         ],
-      ),
-    );
+      );
   }
 
   Widget _buildPromocionCard(
