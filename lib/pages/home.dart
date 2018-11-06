@@ -41,13 +41,13 @@ class AppState extends State<HomePage> {
             ],
           ),
       ),
-      body: _buildBody(),
+      body: _promociones(),
 
       ),
     );
   }
   
-  Widget _buildBody() {
+  Widget _promociones() {
     return BlocProvider<PromocionCatalogoBloc>(
       bloc: PromocionCatalogoBloc(),
       child: PromocionesPage()

@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:fast_shop/api/fstshp_api.dart';
-import 'package:fast_shop/blocs/bloc_provider.dart';
 import 'package:fast_shop/models/promocion_card.dart';
 
 class PromocionDetailsWidget extends StatefulWidget {
@@ -44,19 +43,17 @@ class _PromocionDetailsWidgetState extends State<PromocionDetailsWidget> {
   void didUpdateWidget(PromocionDetailsWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
     _disposeBloc();
-
   }
 
   @override
   void dispose() {
-    _disposeBloc();
+    // _disposeBloc();
     super.dispose();
   }
 
 
   void _disposeBloc() {
     _subscription.cancel();
-
   }
 
   @override

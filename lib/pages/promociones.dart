@@ -1,8 +1,5 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:fast_shop/blocs/bloc_provider.dart';
-import 'package:fast_shop/blocs/favorito_bloc.dart';
 import 'package:fast_shop/blocs/promocion_catalogo_bloc.dart';
 import 'package:fast_shop/models/promocion_card.dart';
 import 'package:fast_shop/pages/detalle_promocion.dart';
