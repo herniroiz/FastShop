@@ -1,9 +1,8 @@
 import 'dart:async';
 
+import 'package:fast_shop/blocs/home_page_bloc.dart';
 import 'package:flutter/material.dart';
-// import 'package:fast_shop/blocs/application_bloc.dart';
-// import 'package:fast_shop/blocs/bloc_provider.dart';
-// import 'package:fast_shop/blocs/favorito_bloc.dart';
+import 'package:fast_shop/blocs/bloc_provider.dart';
 import 'package:fast_shop/pages/home.dart';
 import 'package:fast_shop/widgets/theme.dart';
 
@@ -22,7 +21,10 @@ class MyApp extends StatelessWidget {
       title: 'FASTSHOP',
       theme: appTheme,
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: BlocProvider<HomePageBloc>(
+        bloc: HomePageBloc(),
+        child: HomePage(title: 'FASTSHOP'),
+      ),
       // routes: { CarritoPaginaBloc.routeName: (context) => CarritoPaginaBloc()},
     );
   }
