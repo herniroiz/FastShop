@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 
+import 'package:fast_shop/models/listas.dart';
 import 'package:fast_shop/models/promocion_page_result.dart';
-
+import 'package:http/http.dart' as http;
 ///
 /// FASTSHOP API
 /// 
@@ -13,7 +13,7 @@ class FstShpApi {
   static const String baseUrl = 'app-1538168783.000webhostapp.com';
   //TODO:servidor de imagenes
   final String imageBaseUrl = 'http://app-1538168783.000webhostapp.com';
-  final _httpClient = new HttpClient();
+  // final _httpClient = new HttpClient();
 
   ///
   /// Retorna el listado de categorias basado en criterios:
@@ -57,13 +57,23 @@ class FstShpApi {
       },
     );
 
-    var response = await _getRequest(uri);
-    PromocionPageResult list = PromocionPageResult.fromJSON(json.decode(response));
+    final response = await http.get(uri);
+    PromocionPageResult list = PromocionPageResult.fromJSON(json.decode(response.body));
 
     return list;
   }
 
+Future<List<Lista>> listasList() async {
+    var uri = Uri.https(
+      baseUrl,
+      '/apiRest/select-Listados.php',
+      <String, String>{},
+    );
+      final response = await http.get(uri);
+        var listado = (json.decode(response.body)['results'] as List).map((e) => new Lista.fromJson(e)).toList();
 
+    return listado;
+  }
 
 
   ///
@@ -88,12 +98,12 @@ class FstShpApi {
   ///
   /// Routine to invoke the TMDB Web Server to get answers
   ///
-  Future<String> _getRequest(Uri uri) async {
-    var request = await _httpClient.getUrl(uri);
-    var response = await request.close();
+  // Future<String> _getRequest(Uri uri) async {
+  //   var request = await _httpClient.getUrl(uri);
+  //   var response = await request.close();
 
-    return response.transform(utf8.decoder).join();
-  }
+  //   return response.transform(utf8.decoder).join();
+  // }
 }
 
 FstShpApi api = FstShpApi();

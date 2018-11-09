@@ -47,7 +47,7 @@ class _PromocionDetailsWidgetState extends State<PromocionDetailsWidget> {
 
   @override
   void dispose() {
-    // _disposeBloc();
+    _disposeBloc();
     super.dispose();
   }
 
@@ -80,9 +80,8 @@ class _PromocionDetailsWidgetState extends State<PromocionDetailsWidget> {
             ),
           ),
           SizedBox(height: 4.0),
-          Divider(),
           Container(
-            padding: const EdgeInsets.fromLTRB(4.0, 4.0, 4.0, 8.0),
+            padding: const EdgeInsets.fromLTRB(7.0, 7.0, 7.0, 7.0),
             child: Text(widget.promocionCard.descripcion),
           ),
         ],

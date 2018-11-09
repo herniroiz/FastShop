@@ -73,14 +73,14 @@ class PromocionCatalogoBloc implements BlocBase {
                     // tomamos un cierto tiempo entre cada request
                     .bufferTime(Duration(microseconds: 500))
                     // no actualizamos cuando no necesitamos
-                    .where((batch) => batch.isNotEmpty)
+                    .where((batch) => batch.length > 0)
                     .listen(_handleIndexes);
   }
-
+  @override
   void dispose(){
-    _promocionesController.close();
-    _indexController.close();
-    _totalPromocionesControlles.close();
+    // _promocionesController.close();
+     _indexController.close();
+    // _totalPromocionesControlles.close();
   }
 
 

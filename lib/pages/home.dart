@@ -1,12 +1,13 @@
 import 'package:fast_shop/blocs/bloc_provider.dart';
 import 'package:fast_shop/blocs/home_page_bloc.dart';
+import 'package:fast_shop/blocs/listas_page_bloc.dart';
 import 'package:fast_shop/blocs/promocion_catalogo_bloc.dart';
+import 'package:fast_shop/pages/lista.dart';
 import 'package:fast_shop/pages/promociones.dart';
 import 'package:flutter/material.dart';
 
 enum TabItem { Promociones, Listado, Scanner }
 
-//por que se le pone un estado?
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
   final String title;
@@ -25,9 +26,9 @@ class _HomePageState extends State<HomePage> {
       bloc: PromocionCatalogoBloc(),
       child: PromocionesPage(),
     ),
-    BlocProvider<PromocionCatalogoBloc>(
-      bloc: PromocionCatalogoBloc(),
-      child: PromocionesPage(),
+    BlocProvider<ListaPageBloc>(
+      bloc: ListaPageBloc(),
+      child: ListadoPage(),
     ),
     // BlocProvider<PlaylistPageBloc>(
     //   bloc: PlaylistPageBloc(),

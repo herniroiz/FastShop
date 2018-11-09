@@ -12,5 +12,4 @@ class HomePageBloc extends BlocBase{
   void dispose() {
     _pageIndexController.close();
   }
-
 }

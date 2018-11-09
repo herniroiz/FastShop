@@ -58,7 +58,7 @@ class PromocionCardWidgetState extends State<PromocionCardWidget> {
   @override
   Widget build(BuildContext context) {
     List<Widget> children = <Widget>[
-      ClipRect(
+      ClipRRect(
         clipper: _SquareClipper(),
         child: widget.noHero
                ? Image.network(api.imageBaseUrl + widget.promocionCard.rutaPoster,
@@ -70,7 +70,6 @@ class PromocionCardWidgetState extends State<PromocionCardWidget> {
         ),
       ),
       Container(
-        decoration: _buildGradientBackground(),
         padding: const EdgeInsets.only(
           bottom: 16.0,
           left: 16.0,
@@ -87,21 +86,6 @@ class PromocionCardWidgetState extends State<PromocionCardWidget> {
           fit: StackFit.expand,
           children: children,
         ),
-      ),
-    );
-  }
-
-  BoxDecoration _buildGradientBackground() {
-    return const BoxDecoration(
-      gradient: LinearGradient(
-        begin: Alignment.bottomCenter,
-        end: Alignment.topCenter,
-        stops: <double>[0.0, 0.7, 0.7],
-        colors: <Color>[
-          Colors.black,
-          Colors.transparent,
-          Colors.transparent,
-        ],
       ),
     );
   }
@@ -125,14 +109,14 @@ class PromocionCardWidgetState extends State<PromocionCardWidget> {
   }
 }
 
-class _SquareClipper extends CustomClipper<Rect> {
+class _SquareClipper extends CustomClipper<RRect> {
   @override
-  Rect getClip(Size size) {
-    return new Rect.fromLTWH(0.0, 0.0, size.width, size.width);
+  RRect getClip(Size size) {
+    return new RRect.fromLTRBR(0.0, 0.0, size.width, size.width, Radius.circular(8.0));
   }
 
   @override
-  bool shouldReclip(CustomClipper<Rect> oldClipper) {
+  bool shouldReclip(CustomClipper<RRect> oldClipper) {
     return false;
   }
 }
