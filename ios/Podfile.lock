@@ -1,0 +1,54 @@
+PODS:
+  - Flutter (1.0.0)
+  - GoogleMobileVision/BarcodeDetector (1.4.1):
+    - GoogleMobileVision/Detector (~> 1.4)
+  - GoogleMobileVision/Detector (1.4.1):
+    - GoogleToolboxForMac/Logger (~> 2.1)
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
+    - GTMSessionFetcher/Core (~> 1.1)
+    - Protobuf (~> 3.1)
+  - GoogleToolboxForMac/Defines (2.1.4)
+  - GoogleToolboxForMac/Logger (2.1.4):
+    - GoogleToolboxForMac/Defines (= 2.1.4)
+  - "GoogleToolboxForMac/NSData+zlib (2.1.4)":
+    - GoogleToolboxForMac/Defines (= 2.1.4)
+  - GTMSessionFetcher/Core (1.2.0)
+  - native_device_orientation (0.0.1):
+    - Flutter
+  - Protobuf (3.6.1)
+  - qr_mobile_vision (0.0.1):
+    - Flutter
+    - GoogleMobileVision/BarcodeDetector
+
+DEPENDENCIES:
+  - Flutter (from `.symlinks/flutter/ios`)
+  - native_device_orientation (from `.symlinks/plugins/native_device_orientation/ios`)
+  - qr_mobile_vision (from `.symlinks/plugins/qr_mobile_vision/ios`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - GoogleMobileVision
+    - GoogleToolboxForMac
+    - GTMSessionFetcher
+    - Protobuf
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: ".symlinks/flutter/ios"
+  native_device_orientation:
+    :path: ".symlinks/plugins/native_device_orientation/ios"
+  qr_mobile_vision:
+    :path: ".symlinks/plugins/qr_mobile_vision/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 9d0fac939486c9aba2809b7982dfdbb47a7b0296
+  GoogleMobileVision: bedef12c0924e948fc09b8f1b38c5fe1a3594b6f
+  GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
+  GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
+  native_device_orientation: 1126735962ee926c7067a26ee9b0be020d3f5890
+  Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
+  qr_mobile_vision: 245b97161167cbe4865327b9cc4741f7f0897878
+
+PODFILE CHECKSUM: ff43a125c660fe8e1edaf17e3e7aa37bb5a2cc87
+
+COCOAPODS: 1.5.3

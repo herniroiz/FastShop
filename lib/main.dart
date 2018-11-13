@@ -11,7 +11,7 @@ Future<void> main() async {
   return runApp(
     MyApp(),
   );
-} 
+}
 
 class MyApp extends StatelessWidget {
   // Widget Raiz de la aplicacion

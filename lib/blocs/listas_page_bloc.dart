@@ -6,24 +6,29 @@ import 'package:fast_shop/models/listas.dart';
 import 'package:fast_shop/resources/repository.dart';
 import 'package:rxdart/rxdart.dart';
 
-class ListaPageBloc extends BlocBase {
-  List<Lista> _listas = []; 
-  /// Streams para mostrar las listas
+class ListaBloc extends BlocBase {
+  /// Streams para mostrar las listas de compras
   BehaviorSubject<List<Lista>> _listController = BehaviorSubject<List<Lista>>();
-  StreamSink<List<Lista>> get _listadoSink => _listController.sink;
-  Stream<List<Lista>> get listadoStream => _listController.stream;
-  
-  ListaPageBloc(){
+  StreamSink<List<Lista>> get _inListadoList => _listController.sink;
+  Stream<List<Lista>> get outListadoList => _listController.stream;
+
+  /// Constructor
+  ListaBloc() {
     _fetchListas();
-    }
-    
-    @override
-    void dispose() {
-       _listController.close();
-    }
-    
-    Future<void> _fetchListas() async{
-      _listas = await Repository.fetchListas();
-      _listadoSink.add(UnmodifiableListView<Lista>(_listas));
-    }
+  }
+
+  @override
+  void dispose() {
+    _listController.close();
+  }
+
+  ///
+  /// Metodo de conexion con el servicio que trae las listas
+  /// de compras
+  ///
+  Future<void> _fetchListas() async {
+    List<Lista> _listas = [];
+    _listas = await Repository.fetchListas();
+    _inListadoList.add(UnmodifiableListView<Lista>(_listas));
+  }
 }

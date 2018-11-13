@@ -12,7 +12,7 @@ class PromocionCardWidget extends StatefulWidget {
     this.noHero: false,
   }) : super(key: key);
 
-  final PromocionCard promocionCard;
+  final Promocion promocionCard;
   final VoidCallback onPressed;
   final bool noHero;
 
@@ -21,53 +21,20 @@ class PromocionCardWidget extends StatefulWidget {
 }
 
 class PromocionCardWidgetState extends State<PromocionCardWidget> {
-
-
-  ///
-  /// In order to determine whether this particular Movie is
-  /// part of the list of favorites, we need to inject the stream
-  /// that gives us the list of all favorites to THIS instance
-  /// of the BLoC
-  ///
-  StreamSubscription _subscription;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  ///
-  /// As Widgets can be changed by the framework at any time,
-  /// we need to make sure that if this happens, we keep on
-  /// listening to the stream that notifies us about favorites
-  ///
-
-
-  @override
-  void dispose() {
-    _disposeBloc();
-    super.dispose();
-  }
-
-
-
-  void _disposeBloc() {
-    _subscription.cancel();
-  }
-
   @override
   Widget build(BuildContext context) {
     List<Widget> children = <Widget>[
       ClipRRect(
         clipper: _SquareClipper(),
         child: widget.noHero
-               ? Image.network(api.imageBaseUrl + widget.promocionCard.rutaPoster,
-              fit: BoxFit.cover)
-               : Hero(
-          child: Image.network(api.imageBaseUrl + widget.promocionCard.rutaPoster,
-              fit: BoxFit.cover),
-          tag: 'promocion_${widget.promocionCard.id}',
-        ),
+            ? Image.network(api.imageBaseUrl + widget.promocionCard.rutaPoster,
+                fit: BoxFit.cover)
+            : Hero(
+                child: Image.network(
+                    api.imageBaseUrl + widget.promocionCard.rutaPoster,
+                    fit: BoxFit.cover),
+                tag: 'promocion_${widget.promocionCard.id}',
+              ),
       ),
       Container(
         padding: const EdgeInsets.only(
@@ -90,7 +57,7 @@ class PromocionCardWidgetState extends State<PromocionCardWidget> {
     );
   }
 
-  Widget _buildTextualInfo(PromocionCard promocionCard) {
+  Widget _buildTextualInfo(Promocion promocionCard) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -112,7 +79,8 @@ class PromocionCardWidgetState extends State<PromocionCardWidget> {
 class _SquareClipper extends CustomClipper<RRect> {
   @override
   RRect getClip(Size size) {
-    return new RRect.fromLTRBR(0.0, 0.0, size.width, size.width, Radius.circular(8.0));
+    return new RRect.fromLTRBR(
+        0.0, 0.0, size.width, size.width, Radius.circular(8.0));
   }
 
   @override

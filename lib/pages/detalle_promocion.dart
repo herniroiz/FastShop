@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fast_shop/blocs/bloc_provider.dart';
 import 'package:fast_shop/models/promocion_card.dart';
 import 'package:fast_shop/widgets/promociones_detalles_widget.dart';
 
@@ -9,7 +8,7 @@ class PromocionDetailsPage extends StatelessWidget {
     this.data,
   }) : super(key: key);
 
-  final PromocionCard data;
+  final Promocion data;
 
   @override
   Widget build(BuildContext context) {

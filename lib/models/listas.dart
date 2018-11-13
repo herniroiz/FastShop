@@ -9,7 +9,8 @@ class Lista {
     _id = lista['idListado'];
     _descripcion = lista['descripcion'];
     DateTime _fechaDT = DateTime.parse(lista['fechaCreacion']);
-    _fechaCreacion = "${_fechaDT.day.toString()}/${_fechaDT.month.toString()}/${_fechaDT.year.toString()}";
+    _fechaCreacion =
+        "${_fechaDT.day.toString()}/${_fechaDT.month.toString()}/${_fechaDT.year.toString()}";
   }
 
   Map<String, dynamic> toJson() {

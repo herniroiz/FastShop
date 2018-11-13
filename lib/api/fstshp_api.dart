@@ -1,109 +1,93 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:fast_shop/models/categoria.dart';
 import 'package:fast_shop/models/listas.dart';
-import 'package:fast_shop/models/promocion_page_result.dart';
+import 'package:fast_shop/models/promocion_card.dart';
 import 'package:http/http.dart' as http;
+
 ///
 /// FASTSHOP API
-/// 
-/// 
+///
+///
 
 class FstShpApi {
   static const String baseUrl = 'app-1538168783.000webhostapp.com';
+  // static const String baseUrl = "10.0.2.2";
+
   //TODO:servidor de imagenes
   final String imageBaseUrl = 'http://app-1538168783.000webhostapp.com';
-  // final _httpClient = new HttpClient();
 
-  ///
-  /// Retorna el listado de categorias basado en criterios:
-  /// [tipo]: categoria Padre o hijo
-  /// [pageIndex]: pagina
-  /// [categoriaSup]: categoriaSuperior
-  ///
-  // Future<CategoriaPageResult> pagedList({String tipo: "hijo", int pageIndex: 1, int categoriaSup: 0}) async {
-  //   var uri = Uri.https(
-  //     baseUrl,
-  //     '3/discover/$tipo',
-  //     <String, String>{
-  //       'api_key': TMDB_API_KEY,
-  //       'language': 'en-US',
-  //       'sort_by': 'popularity.desc',
-  //       'include_adult': 'false',
-  //       'include_video': 'false',
-  //       'page': '$pageIndex',
-  //       'release_date.gte': '$minYear',
-  //       'release_date.lte': '$maxYear',
-  //       'with_genres': '$genre',
-  //     },
-  //   );
-
-  //   var response = await _getRequest(uri);
-  //   PromocionPageResult list = PromocionPageResult.fromJSON(json.decode(response));
-
-  //   // Give some additional delay to simulate slow network
-  //   await Future.delayed(const Duration(seconds: 1));
-
-  //   return list;
-  // }
-
-
-  Future<PromocionPageResult> pagedPromocionList({int pageIndex: 1}) async {
+  Future<List<Promocion>> promocionList() async {
     var uri = Uri.https(
       baseUrl,
+      // '/~HerniRoiz/apiRest/select-Promociones.php',
       '/apiRest/select-Promociones.php',
-      <String, String>{
-        'page': '$pageIndex',
-      },
+      <String, String>{},
     );
 
     final response = await http.get(uri);
-    PromocionPageResult list = PromocionPageResult.fromJSON(json.decode(response.body));
+    var promociones = (json.decode(response.body)['results'] as List)
+        .map((e) => new Promocion.fromJson(e))
+        .toList();
 
-    return list;
+    return promociones;
   }
 
-Future<List<Lista>> listasList() async {
+  Future<List<Lista>> listasList() async {
     var uri = Uri.https(
       baseUrl,
       '/apiRest/select-Listados.php',
       <String, String>{},
     );
-      final response = await http.get(uri);
-        var listado = (json.decode(response.body)['results'] as List).map((e) => new Lista.fromJson(e)).toList();
+    final response = await http.get(uri);
+    var listado = (json.decode(response.body)['results'] as List)
+        .map((e) => new Lista.fromJson(e))
+        .toList();
 
     return listado;
   }
 
-
-  ///
-  /// Returns the list of all genres
-  ///
-  // Future<MovieGenresList> movieGenres({String type: "movie"}) async {
+  // Future<List<Lista>> producto() async {
   //   var uri = Uri.https(
   //     baseUrl,
-  //     '3/genre/$type/list',
-  //     <String, String>{
-  //       'api_key': TMDB_API_KEY,
-  //       'language': 'en-US',
-  //     },
+  //     '/apiRest/select-Listados.php',
+  //     <String, String>{},
   //   );
+  //   final response = await http.get(uri);
+  //   var listado = (json.decode(response.body)['results'] as List)
+  //       .map((e) => new Lista.fromJson(e))
+  //       .toList();
 
-  //   var response = await _getRequest(uri);
-  //   MovieGenresList list = MovieGenresList.fromJSON(json.decode(response));
-
-  //   return list;
+  //   return listado;
   // }
 
-  ///
-  /// Routine to invoke the TMDB Web Server to get answers
-  ///
-  // Future<String> _getRequest(Uri uri) async {
-  //   var request = await _httpClient.getUrl(uri);
-  //   var response = await request.close();
 
-  //   return response.transform(utf8.decoder).join();
-  // }
+
+
+
+  /// Retorna el listado de categorias basado en una busqueda:
+  /// [query]: cadena de caracteres que se buscan
+  /// deberia guardarse en una lista para que no tenga que acceder a la BD cada vez que
+  /// se realiza una nueva busqueda (osa habria que traer todas las categorias y 
+  /// subcategorias y realizar el filtrado desde codigo...)
+  Future<List<Categoria>> getCategoriaQuery(String query) async {
+    var uri = Uri.https(
+      baseUrl,
+      'apiRest/select-Categorias-GET.php',
+      <String, String>{
+        'query': '$query',
+      },
+    );
+
+    final response = await http.get(uri);
+    var listado = (json.decode(response.body)['results'] as List)
+        .map((e) => new Categoria.fromJson(e))
+        .toList();
+
+
+    return listado;
+  }
 }
 
 FstShpApi api = FstShpApi();

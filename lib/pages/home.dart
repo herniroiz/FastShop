@@ -1,7 +1,9 @@
 import 'package:fast_shop/blocs/bloc_provider.dart';
+import 'package:fast_shop/blocs/carrito_page_bloc.dart';
 import 'package:fast_shop/blocs/home_page_bloc.dart';
 import 'package:fast_shop/blocs/listas_page_bloc.dart';
 import 'package:fast_shop/blocs/promocion_catalogo_bloc.dart';
+import 'package:fast_shop/pages/carrito.dart';
 import 'package:fast_shop/pages/lista.dart';
 import 'package:fast_shop/pages/promociones.dart';
 import 'package:flutter/material.dart';
@@ -16,24 +18,22 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-
-
 class _HomePageState extends State<HomePage> {
   HomePageBloc _bloc;
 
   final _widgetOptions = [
-    BlocProvider<PromocionCatalogoBloc>(
-      bloc: PromocionCatalogoBloc(),
-      child: PromocionesPage(),
-    ),
-    BlocProvider<ListaPageBloc>(
-      bloc: ListaPageBloc(),
+    BlocProvider<ListaBloc>(
+      bloc: ListaBloc(),
       child: ListadoPage(),
     ),
-    // BlocProvider<PlaylistPageBloc>(
-    //   bloc: PlaylistPageBloc(),
-    //   child: PlaylistPage(),
-    // ),
+    BlocProvider<PromocionBloc>(
+      bloc: PromocionBloc(),
+      child: PromocionesPage(),
+    ),
+    BlocProvider<CarritoBloc>(
+      bloc: CarritoBloc(),
+      child: CarritoPage(),
+    ),
   ];
 
   @override
@@ -42,57 +42,45 @@ class _HomePageState extends State<HomePage> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-    Expanded(
-      child: StreamBuilder<int>(
-        initialData: 0,
-        stream: _bloc.pageIndexStream,
-        builder: (context, snapshot) {
-          return Scaffold(
-              appBar: AppBar(title: Text('FASTSHOP')),
-            body: _widgetOptions.elementAt(snapshot.data),
-            bottomNavigationBar: BottomNavigationBar(
-              currentIndex: snapshot.data,
-              items: [
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.local_offer),
-                  title: Text("PROMOS"),
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.list),
-                  title: Text("LISTADO"),
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.shopping_cart),
-                  title: Text("CARRITO"),
-                ),
-              ],
-              onTap: _onItemSelected,
-            ),
-          );
-        }),
-    ),
-    ],
+        Expanded(
+          child: StreamBuilder<int>(
+              initialData: 0,
+              stream: _bloc.pageIndexStream,
+              builder: (context, snapshot) {
+                return Scaffold(
+                  appBar: AppBar(title: Text('FASTSHOP')),
+                  body: _widgetOptions.elementAt(snapshot.data),
+                  bottomNavigationBar: BottomNavigationBar(
+                    currentIndex: snapshot.data,
+                    items: [
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.list),
+                        title: Text("LISTADO"),
+                      ),
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.local_offer),
+                        title: Text("PROMOS"),
+                      ),
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.shopping_cart),
+                        title: Text("CARRITO"),
+                      ),
+                    ],
+                    onTap: _onItemSelected,
+                  ),
+                );
+              }),
+        ),
+      ],
     );
   }
 
   void _onItemSelected(int index) => _bloc.pageIndex.add(index);
-
   @override
   void dispose() {
     super.dispose();
   }
 }
-
-
-
-
-
-
-
-
-
-
-
 
 // class AppState extends State<HomePage> {
 
@@ -129,7 +117,7 @@ class _HomePageState extends State<HomePage> {
 //       ),
 //     );
 //   }
-  
+
 //   Widget _promociones() {
 //     return BlocProvider<PromocionCatalogoBloc>(
 //       bloc: PromocionCatalogoBloc(),
