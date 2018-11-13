@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:fast_shop/models/categoria.dart';
 import 'package:fast_shop/models/listas.dart';
+import 'package:fast_shop/models/producto.dart';
 import 'package:fast_shop/models/promocion_card.dart';
 import 'package:http/http.dart' as http;
 
@@ -48,19 +49,19 @@ class FstShpApi {
     return listado;
   }
 
-  // Future<List<Lista>> producto() async {
-  //   var uri = Uri.https(
-  //     baseUrl,
-  //     '/apiRest/select-Listados.php',
-  //     <String, String>{},
-  //   );
-  //   final response = await http.get(uri);
-  //   var listado = (json.decode(response.body)['results'] as List)
-  //       .map((e) => new Lista.fromJson(e))
-  //       .toList();
-
-  //   return listado;
-  // }
+  Future<Producto> fetchProductoScanned(int code) async {
+    var uri = Uri.https(
+      baseUrl,
+      '/apiRest/select-Producto.php',
+      <String, String>{
+        'code': '$code',
+      },
+    );
+    final response = await http.get(uri);
+    var producto = (json.decode(response.body)['results'] as Producto);
+    //trycatch??
+    return producto;
+  }
 
 
 

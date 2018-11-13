@@ -1,5 +1,5 @@
 import 'package:fast_shop/blocs/bloc_provider.dart';
-import 'package:fast_shop/blocs/carrito_page_bloc.dart';
+import 'package:fast_shop/blocs/carrito_bloc.dart';
 import 'package:fast_shop/blocs/home_page_bloc.dart';
 import 'package:fast_shop/blocs/listas_page_bloc.dart';
 import 'package:fast_shop/blocs/promocion_catalogo_bloc.dart';

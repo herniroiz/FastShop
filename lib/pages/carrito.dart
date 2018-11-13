@@ -1,6 +1,5 @@
-import 'package:fast_shop/blocs/barcode_page_bloc.dart';
 import 'package:fast_shop/blocs/bloc_provider.dart';
-import 'package:fast_shop/blocs/carrito_page_bloc.dart';
+import 'package:fast_shop/blocs/carrito_bloc.dart';
 import 'package:fast_shop/widgets/barcode_scanner_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -22,15 +21,12 @@ class CarritoPage extends StatelessWidget {
             Navigator.push(
               context,
               new MaterialPageRoute(
-                builder: (context) => BlocProvider<BarcodePageBloc>(
-                      bloc: BarcodePageBloc(),
+                builder: (context) => BlocProvider<CarritoBloc>(
+                      bloc: bloc,
                       child: BarcodeScannerPage(),
                     ),
               ),
             );
-            // setState(() {
-            // camState = !camState;
-            // });
           }),
     );
   }

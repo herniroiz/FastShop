@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:fast_shop/api/fstshp_api.dart';
 import 'package:fast_shop/models/categoria.dart';
 import 'package:fast_shop/models/listas.dart';
+import 'package:fast_shop/models/producto.dart';
 import 'package:fast_shop/models/promocion_card.dart';
 
 class Repository {
@@ -32,6 +33,16 @@ class Repository {
       result = await api.getCategoriaQuery(query);
     } catch (e) {
       // print(e);
+    }
+    return result;
+  }
+
+  static Future<Producto> fetchProductoScanned(code) async{
+    Producto result;
+    try {
+      result = await api.fetchProductoScanned(code);
+    } catch (e) {
+      result = null;
     }
     return result;
   }

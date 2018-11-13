@@ -1,4 +1,4 @@
-import 'package:fast_shop/blocs/barcode_page_bloc.dart';
+import 'package:fast_shop/blocs/carrito_bloc.dart';
 import 'package:fast_shop/blocs/bloc_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_mobile_vision/qr_camera.dart';
@@ -7,7 +7,7 @@ class BarcodeScannerPage extends StatelessWidget {
   bool camState = true;
   @override
   Widget build(BuildContext context) {
-    final BarcodePageBloc bloc = BlocProvider.of<BarcodePageBloc>(context);
+    final CarritoBloc bloc = BlocProvider.of<CarritoBloc>(context);
     // final BarcodeBloc barcodeBloc = BlocProvider.of<BarcodeBloc>(context);
     return Scaffold(
       appBar: AppBar(
