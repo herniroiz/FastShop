@@ -14,7 +14,7 @@ import 'package:http/http.dart' as http;
 
 class FstShpApi {
   static const String baseUrl = 'app-1538168783.000webhostapp.com';
-  // static const String baseUrl = "10.0.2.2";
+  // static const String baseUrl = "10.16.32.31";
 
   //TODO:servidor de imagenes
   final String imageBaseUrl = 'http://app-1538168783.000webhostapp.com';
@@ -52,13 +52,14 @@ class FstShpApi {
   Future<Producto> fetchProductoScanned(int code) async {
     var uri = Uri.https(
       baseUrl,
-      '/apiRest/select-Producto.php',
+      '/apiRest/select-Productos.php',
       <String, String>{
         'code': '$code',
       },
     );
     final response = await http.get(uri);
-    var producto = (json.decode(response.body)['results'] as Producto);
+    var producto = (json.decode(response.body)['results'] as List)
+        .map((e) => new Producto.fromJson(e)).toList()[0];
     //trycatch??
     return producto;
   }

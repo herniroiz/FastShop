@@ -7,8 +7,8 @@ class Producto {
   Categoria _categoria;
   String _marca;
   String _tipoUnidad;
-  double _tamano;
-  double _precio;
+  int _tamano;
+  int _precio;
 
   Producto(int _id, int _codigo, String _descripcion, String _marca,
       String _tipoUnidad, double _tamano, double _precio,
@@ -30,6 +30,6 @@ class Producto {
   String get marca => this._marca;
   String get tipoUnidad => this._tipoUnidad;
   Categoria get categoria => this._categoria;
-  double get tamano => this._tamano;
-  double get precio => this._precio;
+  int get tamano => this._tamano;
+  int get precio => this._precio;
 }

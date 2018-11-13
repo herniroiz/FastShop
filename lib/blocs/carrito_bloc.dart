@@ -74,13 +74,13 @@ class CarritoBloc extends BlocBase {
 
   @override
   void dispose() {
-    _carritoController.close();
-    _carritoTotalController.close();
-    _articuloAddController.close();
-    _articuloRemoveController.close();
-    _barcodeController.close();
-    _barcodeAddController.close();
-    _barcodeOutController.close();
+    // _carritoController.close();
+    // _carritoTotalController.close();
+    // _articuloAddController.close();
+    // _articuloRemoveController.close();
+    // _barcodeController.close();
+    // _barcodeAddController.close();
+    // _barcodeOutController.close();
   }
 
   void _handleAddArticulo(Producto event) {
@@ -122,7 +122,7 @@ class CarritoBloc extends BlocBase {
               }
             
               void _notifyAdd() {
-                _inCarrito.add(_carrito);
+                _inCarrito.add(UnmodifiableListView(_carrito));
               }
             void _notifyRemove() {}
 
